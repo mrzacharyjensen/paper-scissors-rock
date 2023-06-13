@@ -4,12 +4,21 @@ const output = document.querySelector(".result");*/
 // Get list of buttons that are part of the choices div
 const buttons = document.getElementById("choices").querySelectorAll('button');
 
+// Score counters
+let playerScore = 0,
+    computerScore = 0,
+    drawScore = 0;
+
 // Event listener for press of buttons
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
         // Play round of game
-        let output = playRound(button.id, getComputerChoice());
-        output.textContent = output;
+        let playerWin = playRound(button.id, getComputerChoice());
+        if (playerWin[0] == "Win") playerScore++;
+        let output = (playerWin[1] + "\n"
+                    + " Player Score: " + playerScore.toString() 
+                    + " Computer Score: " + computerScore.toString() 
+                    + " Draw Score: " + drawScore.toString());
         document.querySelector(".result").textContent = output;
         console.log(output);
     });
@@ -69,11 +78,11 @@ function playRound(playerSelection, computerSelection) {
     };
     switch(playerWin) {
         case "Win":
-            return "You Win! " + playerSelection + " beats " + computerSelection;
+            return [playerWin, "You Win! " + playerSelection + " beats " + computerSelection];
         case "Lose":
-            return "You Lose! " + computerSelection + " beats " + playerSelection;
+            return [playerWin, "You Lose! " + computerSelection + " beats " + playerSelection];
         case "Draw":
-            return "Draw! Both " + playerSelection;
+            return [playerWin, "Draw! Both " + playerSelection];
     };
 };
 
