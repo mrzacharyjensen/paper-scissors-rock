@@ -1,57 +1,70 @@
-const input = document.querySelector(".playerSelection");
-const output = document.querySelector(".result");
+/*const input = document.querySelector(".playerSelection");
+const output = document.querySelector(".result");*/
+
+// Get list of buttons that are part of the choices div
+const buttons = document.getElementById("choices").querySelectorAll('button');
+
+// Event listener for press of buttons
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        // Play round of game
+        let output = playRound(button.id, getComputerChoice());
+        output.textContent = output;
+        document.querySelector(".result").textContent = output;
+        console.log(output);
+    });
+});
 
 function getComputerChoice() {
     // Generate random number between 0 and 2
     let randomInt = Math.floor(Math.random()*3);
     switch(randomInt) {
         case 0:
-            return "Paper";
+            return "paper";
         case 1:
-            return "Scissors";
+            return "scissors";
         case 2:
-            return "Rock";
+            return "rock";
     };
 };
 
 function playRound(playerSelection, computerSelection) {
     let playerWin = "";
     switch(playerSelection) {
-        case "Paper":
+        case "paper":
             switch(computerSelection) {
-                case "Paper":
+                case "paper":
                     playerWin = "Draw";
                     break;
-                case "Scissors":
+                case "scissors":
                     playerWin = "Lose";
                     break;
-                case "Rock":
+                case "rock":
                     playerWin = "Win";
             };
             break;
-        case "Scissors":
+        case "scissors":
             switch(computerSelection) {
-                case "Paper":
+                case "paper":
                     playerWin = "Win";
                     break;
-                case "Scissors":
+                case "scissors":
                     playerWin = "Draw";
                     break;
-                case "Rock":
+                case "rock":
                     playerWin = "Lose";
             };
             break;
-        case "Rock":
+        case "rock":
             switch(computerSelection) {
-                case "Paper":
+                case "paper":
                     playerWin = "Lose";
                     break;
-                case "Scissors":
+                case "scissors":
                     playerWin = "Win";
                     break;
-                case "Rock":
+                case "rock":
                     playerWin = "Draw";
-                    console.log("2Rock");
             };
     };
     switch(playerWin) {
@@ -64,10 +77,11 @@ function playRound(playerSelection, computerSelection) {
     };
 };
 
+/*
 input.addEventListener("change", () => {
     const playerSelection = input.value;
     const computerSelection = getComputerChoice();
     
-    //const computerSelection = 
-    output.textContent = computerSelection +  playRound(playerSelection, computerSelection);
+    output.textContent = playRound(playerSelection, computerSelection);
 });
+*/ 
